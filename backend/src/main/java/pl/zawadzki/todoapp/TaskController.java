@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.*;
 import pl.zawadzki.todoapp.pojo.Task;
 import pl.zawadzki.todoapp.repository.TaskRepository;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/tasks")
 @CrossOrigin
@@ -23,8 +25,18 @@ public class TaskController {
         return taskRepository.findAll();
     }
 
+    @GetMapping("byId/{id}")
+    public Optional<Task> getTaskById(@PathVariable Long id){
+        return taskRepository.findById(id);
+    }
+
     @PostMapping("/add")
     public Task saveTask(@RequestBody Task task){
         return taskRepository.save(task);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteTaskById(@PathVariable Long id){
+        taskRepository.deleteById(id);
     }
 }
