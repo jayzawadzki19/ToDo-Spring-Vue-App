@@ -2,7 +2,6 @@
   <div class="wrapper">
 
     <div class="addTask">
-
       <label for="taskInput">Add new task to do</label>
       <input type="text"
             id="taskInput"
@@ -14,16 +13,21 @@
         Add task
       </button>
     </div>
+    <TaskList/>
   </div>
 </template>
 
 <script>
 import axios from '../../node_modules/axios';
+import TaskList from './TaskList.vue';
 
 const URL = 'http://localhost:9000/tasks/add';
 
 export default {
   name: 'ToDo',
+  components: {
+    TaskList,
+  },
   data() {
     return {
       newTask: '',
