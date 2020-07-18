@@ -1,6 +1,6 @@
 <template>
-  <div class="wrapper">
-<ul>
+  <div class="listWrapper">
+<ul class="list">
     <li v-for="task in tasks" :key="task.id">
         <p>{{task.title}}</p>
     </li>
@@ -46,6 +46,21 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+ul li{
+display: flex;
+flex-direction: column;
+padding: 10px;
+list-style-type: none;
+background: rgb(255, 255, 255, 0.4);
+align-items:center;
+width: 40vw;
+border-radius: 15%;
+}
 
+ul li p{
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+}
 </style>
