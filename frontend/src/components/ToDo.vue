@@ -47,6 +47,7 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+      this.$root.$emit('reload');
     },
   },
 };

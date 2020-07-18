@@ -25,6 +25,12 @@ export default {
     this.hadnleTask();
   },
 
+  mounted() {
+    this.$root.$on('reload', () => {
+      this.hadnleTask();
+    });
+  },
+
   methods: {
     hadnleTask() {
       axios.get(`${URL}`)
