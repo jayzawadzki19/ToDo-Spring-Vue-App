@@ -9,6 +9,12 @@
 </template>
 
 <style lang="scss">
+body{
+/* background by SVGBackgrounds.com */
+background-image: url('./assets/Liquid-Cheese.svg');
+background-attachment: fixed;
+background-size: cover;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
