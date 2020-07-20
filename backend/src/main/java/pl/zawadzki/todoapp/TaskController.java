@@ -1,6 +1,8 @@
 package pl.zawadzki.todoapp;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.zawadzki.todoapp.pojo.Task;
 import pl.zawadzki.todoapp.repository.TaskRepository;
@@ -26,8 +28,12 @@ public class TaskController {
     }
 
     @GetMapping("byId/{id}")
-    public Optional<Task> getTaskById(@PathVariable Long id){
-        return taskRepository.findById(id);
+    public ResponseEntity<Task> getTaskById(@PathVariable Long id){
+        Optional<Task> taskOp = taskRepository.findById(id);
+        if(taskOp.isPresent()){
+            return new ResponseEntity<>(taskOp.get(), HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null,HttpStatus.NOT_FOUND);
     }
 
     @PostMapping("/add")
