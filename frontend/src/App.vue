@@ -1,6 +1,8 @@
 <template>
   <div id="app">
     <router-view/>
+    <router-link to="/tasks">Tasks</router-link>
+    <router-link to="/"> | Home</router-link>
   </div>
 </template>
 
