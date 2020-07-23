@@ -1,23 +1,24 @@
-import axios from 'axios'
+import axios from 'axios';
 
 const SERVER_URL = 'http://localhost:9000/tasks/';
 
 const instance = axios.create({
   baseURL: SERVER_URL,
-  timeout: 1000
+  timeout: 1000,
 });
 
 export default {
+  /* eslint no-underscore-dangle: 0 */
 
-  createNew: (text, completed) => instance.post('add', {title: text, completed: completed}),
+  createNew: (title, completed) => instance.post('add', { title, completed }),
 
   getAll: () => instance.get('all', {
     transformResponse: [function (data) {
-      return data? JSON.parse(data)._embedded.todos : data;
-    }]
+      return data ? JSON.parse(data) : data;
+    }],
   }),
 
-  updateForId: (id, text, completed) => instance.put('update/'+id, {title: text, completed: completed}),
+  updateForId: (id, title, completed) => instance.put(`update/${id}`, { title, completed }),
 
-  removeForId: (id) => instance.delete('delete/'+id)
-}
+  removeForId: (id) => instance.delete(`delete/${id}`),
+};
