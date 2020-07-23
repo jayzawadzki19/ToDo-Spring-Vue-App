@@ -2,11 +2,11 @@
   <div class="tasks">
     <header class="header">
     <input class="new-task"
+            placeholder="what needs to be done..."
             v-model="placeHolder"
             @keyup.enter="addNew">
     </header>
     <section class="main" v-show="todos.length" v-cloak>
-      <input class="toggle-all" type="checkbox">
       <ul class="todo-list">
         <li v-for="todo in todos"
             class="todo"
@@ -14,7 +14,7 @@
           <div class="view">
             <input class="toggle" type="checkbox" v-model="todo.completed">
             <label>{{todo.title}}</label>
-            <button class="destroy"></button>
+            <button class="destroy" @click="remove(todo)">Remove</button>
           </div>
         </li>
       </ul>
@@ -58,6 +58,16 @@ export default {
         .catch((error) => {
           console.log(error);
         });
+      this.placeHolder = '';
+    },
+    remove(todo) {
+      api.removeForId(todo.id)
+        .then(() => {
+          this.todos.splice(this.todos.indexOf(todo), 1);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
   data() {
@@ -73,5 +83,50 @@ export default {
 </script>
 
 <style>
+  body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .tasks{
+  }
+
+  .new-task {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgb(255,255,255, 0.3);
+    border: none;
+    border-bottom: black 2px solid;
+    width: 50vw;
+    height: 40px;
+    font-size: 30px;
+}
+  .todo-list {
+    list-style: none;
+    background: rgb(255,255,255, 0.3);
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    padding-left: 0;
+  }
+
+  .todo {
+    margin-top: 10px;
+    border-bottom: 1px solid lightgray;
+    width: 100%;
+    display: flex;
+  }
+
+  .destroy {
+    background: none;
+    border: none;
+    opacity: 0.2;
+  }
+
+  .toggle {
+    opacity: 0.2;
+  }
 
 </style>
